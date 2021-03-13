@@ -1,5 +1,5 @@
 # Album-Compress-Helper
-A tool to compress album using ffmpeg and exiftool, support photo and video.
+A cross-platform tool to compress album using ffmpeg and exiftool, support photo and video.
 
 Execute ffmpeg to selected file types in source directory recursively, then use ExifTool to copy metadata from original file to new ones.Compressed version is saved in destination directory while keep original file structure.
 
@@ -9,6 +9,10 @@ I use this tool to create a compressed album to reduce icloud storage usage.
 * [.Net 5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
 * [FFMPEG](https://www.ffmpeg.org/) binary executable in system path
 * [ExifTool](https://exiftool.org/) binary executable in system path
+
+# Download
+Prebuild for windows-x64, linux-x64 and osx-x64 available at [release page](https://github.com/aiex718/Album-Compress-Helper/releases/)
+* *Tested on windows 20H2 and osx big-sur*
 
 # Arguments
 | Argument Name | Short Name | HelpText                                                                                                                                                                         |

@@ -17,7 +17,7 @@ I use this tool to create a compressed album to reduce icloud storage usage.
 | dst           |            | Path to destination directory, create if not exist.                                                                                                                              |
 | argff         |            | Arguments* pass to FFMPEG, use %in% for input file path, %out% for output file path                                                                                               |
 | argexif       |            | Arguments* pass to ExifTool, use %in% for input file path, %out% for output file path                                                                                             |
-| comment       | c          | Ignore file with spicific comment tag from input, otherwise write comment to output file.                                                                                        |
+| comment       | c          | Ignore file with spicific comment tag from input, and write comment tag to output file.                                                                                        |
 | ignore        | i          | Ignore if files already exist in destination.                                                                                                                                    |
 | ext           |            | File extensions filter such as jpg or mp4, use',' to seperate multiple extensions.                                                                                               |
 | thread        | t          | Set multi-thread limit, default is 1.                                                                                                                                            |

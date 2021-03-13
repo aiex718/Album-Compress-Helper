@@ -27,9 +27,9 @@ Execute ffmpeg to selected file types in a directory recursively, then use ExifT
 * Due to CommandLineParser, arguments pass to ffmpeg and ExifTool start with dash(-) need escape character '\\' in the beginning.
 
 # Example Usage
-## Compress jpg,jpeg,png
+## Compress jpeg,jpg,png
 
-    AlbumCompressHelper --src "C:\SrcFolder" --dst "C:\DstFolder" --ext jpeg,jpg,png --argff "\-i %in% \-q:v 3 %out%" --argexif "\-TagsFromFile %in% \-overwrite_original \-all:all>all:all %out%" -k -i -c compressed -d min -t 4
+    Album-Compress-Helper --src "C:\SrcFolder" --dst "C:\DstFolder" --ext jpeg,jpg,png --argff "\-i %in% \-q:v 3 %out%" --argexif "\-TagsFromFile %in% \-overwrite_original \-all:all>all:all %out%" -k -i -c compressed -d min -t 4
 
 | Argument Name | Value                                                                 | Description                                                                                                                                                                                   |
 |---------------|-----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -44,9 +44,9 @@ Execute ffmpeg to selected file types in a directory recursively, then use ExifT
 | date          | min                                                                   | Modify lastwrite and creation time, select the minimum value and write to both.                                                                                                               |
 | thread        | 4                                                                     | Run 4 thread simultaneously.                                                                                                                                                                  |
 
-## Compress mp4,mov
+## Compress avi,mp4,mov
 
-    AlbumCompressHelper --src "C:\SrcFolder" --dst "C:\DstFolder" --ext avi,mp4,mov --argff "\-i %in% \-preset:v medium \-c:v libx264 \-crf 24 %out%" --argexif "\-TagsFromFile %in% \-overwrite_original \-all:all>all:all %out%" -i -c compressed -d min --vvv
+    Album-Compress-Helper --src "C:\SrcFolder" --dst "C:\DstFolder" --ext avi,mp4,mov --argff "\-i %in% \-preset:v medium \-c:v libx264 \-crf 24 %out%" --argexif "\-TagsFromFile %in% \-overwrite_original \-all:all>all:all %out%" -i -c compressed -d min --vvv
 
 | Argument Name | Value                                                                 | Description                                                                                                                                                                                                                      |
 |---------------|-----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

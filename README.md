@@ -25,7 +25,7 @@ Prebuild for windows-x64, linux-x64 and osx-x64 available at [release page](http
 | ignore        | i          | Ignore if files already exist in destination.                                                                                                                                    |
 | ext           |            | File extensions filter such as jpg or mp4, use ',' to seperate multiple extensions.                                                                                               |
 | thread        | t          | Set multi-thread limit, default is 1.                                                                                                                                            |
-| date          | d          | Modify lastwrite and creation time, available options: <br />copy : copy from original,<br /> min or max : select minimum or maximum between lastwrite or creation time, then write to both.  |
+| date          | d          | Modify lastwrite and creation time, available options: <br />copy : copy from original,<br /> min or max : select minimum or maximum between lastwrite and creation time, then overwrite to both.  |
 | keep          | k          | Copy original file if compressed version is larger. |
 | verbose       | v          | Show verbose info.                                                                                                                                                               |
 | vvv           |            | Show more verbose info, mostly from ffmpeg.                                                                                                                                      |

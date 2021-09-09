@@ -1,9 +1,9 @@
 # Album-Compress-Helper
-A cross-platform tool to compress album using ffmpeg and exiftool, support photo and video.
+A cross-platform tool to compress photos and videos (using ffmpeg and exiftool).
 
-Execute ffmpeg to selected file types in source directory recursively, then use ExifTool to copy metadata from original file to new ones.Compressed version is saved in destination directory while keep original file structure.
+Recursively run ffmpeg to compress files in source directory, then copy metadata from original. Compressed version saved in destination directory with same structure as original.
 
-I use this tool to create a compressed album to reduce icloud storage usage.
+I personally use this tool to create a compressed album for reducing icloud storage usage.
 
 # Requirements
 * [.Net 5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
@@ -18,7 +18,7 @@ Prebuild for windows-x64, linux-x64 and osx-x64 available at [release page](http
 | Argument Name | Short Name | HelpText                                                                                                                                                                         |
 |---------------|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | src           |            | Path to source directory.                                                                                                                                                        |
-| dst           |            | Path to destination directory, create if not exist.                                                                                                                              |
+| dst           |            | Path to destination directory, will create if not exist.                                                                                                                          |
 | argff         |            | Arguments* pass to FFMPEG, use %in% for input file path, %out% for output file path                                                                                               |
 | argexif       |            | Arguments* pass to ExifTool, use %in% for input file path, %out% for output file path                                                                                             |
 | comment       | c          | Ignore file with spicific comment tag from input, and write comment tag to output file.                                                                                        |
@@ -40,7 +40,7 @@ Prebuild for windows-x64, linux-x64 and osx-x64 available at [release page](http
 | Argument Name | Value                                                                 | Description                                                                                                                                                                                   |
 |---------------|-----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | src           | "C:\SrcFolder"                                                        | Path to source directory.                                                                                                                                                                     |
-| dst           | "C:\DstFolder"                                                        | Path to destination directory, create if not exist.                                                                                                                                           |
+| dst           | "C:\DstFolder"                                                        | Path to destination directory, will create if not exist.                                                                                                                                      |
 | ext           | jpeg,jpg,png                                                          | Apply to *.jpeg *.jpg and *.png files.                                                                                                                                                        |
 | argff         | "\\-i %in% \\-q:v 3 %out%"                                            | Compress files with -q:v 3 quality setting.<br />Will be translate to shell command "ffmpeg -i C:\SrcFolder\\*files.*ext -q:v 3 C:\DstFolder\\*files.*ext" and execute.                              |
 | argexif       | "\\-TagsFromFile %in% \\-overwrite_original \\-all:all>all:all %out%" | Copy tags from original file.<br /> Will be translate to shell command "exiftool -TagsFromFile C:\SrcFolder\\*files.*ext -overwrite_original -all:all>all:all C:\DstFolder\\*files.*ext" and execute. |
@@ -57,7 +57,7 @@ Prebuild for windows-x64, linux-x64 and osx-x64 available at [release page](http
 | Argument Name | Value                                                                 | Description                                                                                                                                                                                                                      |
 |---------------|-----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | src           | "C:\SrcFolder"                                                        | Path to source directory.                                                                                                                                                                                                        |
-| dst           | "C:\DstFolder"                                                        | Path to destination directory, create if not exist.                                                                                                                                                                              |
+| dst           | "C:\DstFolder"                                                        | Path to destination directory, will create if not exist.                                                                                                                                                                          |
 | ext           | avi,mp4,mov                                                           | Apply to *.avi *.mp4 and *.mov files.                                                                                                                                                                                            |
 | argff         | "\\-i %in% \\-preset:v medium \\-c:v libx264 \\-crf 24 %out%"         | Compress video with "-preset:v medium -c:v libx264 -crf 24" quality setting. <br />Will be translate to shell command "ffmpeg -i C:\SrcFolder\\*files.*ext -preset:v medium -c:v libx264 -crf 24 C:\DstFolder\\*files.*ext" and execute. |
 | argexif       | "\\-TagsFromFile %in% \\-overwrite_original \\-all:all>all:all %out%" | Copy tags from original file, <br />Will be translate to shell command "exiftool -TagsFromFile C:\SrcFolder\\*files.*ext -overwrite_original -all:all>all:all C:\DstFolder\\*files.*ext" and execute.                                    |

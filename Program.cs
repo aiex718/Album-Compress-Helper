@@ -63,8 +63,8 @@ namespace Album_Compress_Helper
                 .WithParsed(o=>Option=o)
                 .WithNotParsed(o=>Environment.Exit(-1));
 
-            Option.FFArgument = Option.FFArgument.Replace("\\","");
-            Option.ExifArgument = Option.ExifArgument.Replace("\\","");
+            Option.FFArgument = Option.FFArgument?.Replace("\\","");
+            Option.ExifArgument = Option.ExifArgument?.Replace("\\","");
 
             List<string> ExtensionFilters = Option.Extensions.ToList();
 

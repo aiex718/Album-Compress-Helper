@@ -1,0 +1,52 @@
+{
+	"version": "2.0.0",
+	//create task for dot net publish command
+	"tasks": [
+		{
+			"label": "dotnet publish win-x64",
+			"command": "dotnet",
+			"type": "shell",
+			"args": [
+				"publish",
+				"-r",
+				"win-x64",
+				"-c",
+				"Release",
+				"-p:PublishSingleFile=true",
+				"-p:PublishTrimmed=true",
+				"-p:IncludeAllContentForSelfExtract=true",
+			]
+		},
+		{
+			"label": "dotnet publish linux-x64",
+			"command": "dotnet",
+			"type": "shell",
+			"args": [
+				"publish",
+				"-r",
+				"linux-x64",
+				"-c",
+				"Release",
+				"-p:PublishSingleFile=true",
+				"-p:PublishTrimmed=true",
+				"-p:IncludeAllContentForSelfExtract=true",
+			]
+		},
+		{
+			"label": "dotnet publish osx-x64",
+			"command": "dotnet",
+			"type": "shell",
+			"args": [
+				"publish",
+				"-r",
+				"osx-x64",
+				"-c",
+				"Release",
+				"-p:PublishSingleFile=true",
+				"-p:PublishTrimmed=true",
+				"-p:IncludeAllContentForSelfExtract=true",
+			]
+		}
+	]
+
+}

@@ -13,8 +13,8 @@ namespace Album_Compress_Helper
 {
     class Program
     {
-        const string input_identifier = "%in%";
-        const string output_identifier = "%out%";
+        const string input_identifier = "{in}";
+        const string output_identifier = "{out}";
 
         public class Options
         {
@@ -97,33 +97,45 @@ namespace Album_Compress_Helper
 
                 Directory.CreateDirectory(Path.GetDirectoryName(SavePath));                
                 
-                Task t = Task.Run(()=>{
-                    
-                    //Check Comment
-                    if(String.IsNullOrEmpty(Option.Comment)==false && 
-                        Option.Comment == ReadComment(FilePath))
+                Task t = Task.Factory.StartNew(()=>{
+                    bool retry = true;
+                    while(retry)
                     {
-                        Console.WriteLine($"File already has comment, ignored:{SavePath}");
-                        Interlocked.Increment(ref Ignored_cnt);
-                        return;//skip
+                        //Check Comment
+                        if(String.IsNullOrEmpty(Option.Comment)==false && 
+                            Option.Comment == ReadComment(FilePath))
+                        {
+                            Console.WriteLine($"File already has comment, ignored:{SavePath}");
+                            Interlocked.Increment(ref Ignored_cnt);
+                            return;//skip
+                        }
+
+                        if(String.IsNullOrEmpty(Option.FFArgument)==false)
+                        {
+                            RunFFMPEG(FilePath,SavePath);
+                            if(File.Exists(SavePath)==false)
+                            {
+                                Console.WriteLine($"FFMPEG failed, retry:{SavePath}");
+                                continue;
+                            }
+                        }
+
+                        if(String.IsNullOrEmpty(Option.ExifArgument)==false)
+                            RunExifTool(FilePath,SavePath);
+
+                        if(String.IsNullOrEmpty(Option.Date)==false)
+                            CopyDate(FilePath,SavePath);
+
+                        if(Option.Keep && CheckFileSize(FilePath,SavePath))
+                        {
+                            File.Copy(FilePath, SavePath, true);
+                            Console.WriteLine($"Output file is larger, copy original:{SavePath}");
+                            Interlocked.Increment(ref Keep_cnt);
+                        }
+
+                        retry = false;
                     }
-
-                    if(String.IsNullOrEmpty(Option.FFArgument)==false)
-                        RunFFMPEG(FilePath,SavePath);
-
-                    if(String.IsNullOrEmpty(Option.ExifArgument)==false)
-                        RunExifTool(FilePath,SavePath);
-
-                    if(String.IsNullOrEmpty(Option.Date)==false)
-                        CopyDate(FilePath,SavePath);
-
-                    if(Option.Keep && CheckFileSize(FilePath,SavePath))
-                    {
-                        Console.WriteLine($"Output file is larger, copy original:{SavePath}");
-                        Interlocked.Increment(ref Keep_cnt);
-                    }
-                        
-                });
+                },TaskCreationOptions.LongRunning);
 
                 TaskList.Add(t);
                 Console.WriteLine($"Processing:{SavePath}");
@@ -247,7 +259,6 @@ namespace Album_Compress_Helper
                 var save_length = new FileInfo(SavePath).Length;
                 if (save_length>file_length)
                 {
-                    File.Copy(FilePath, SavePath, true);
                     return true;
                 }
             }
